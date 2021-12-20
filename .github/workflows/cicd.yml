@@ -2,6 +2,7 @@ name: Build-Deploy-PR
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
 jobs:
   deploy-pr:
     name: PR-Env
@@ -17,7 +18,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-         
+
   build-deploy-prod-test: 
     name: Prod-test
     runs-on: ubuntu-latest
