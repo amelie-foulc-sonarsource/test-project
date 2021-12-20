@@ -1,0 +1,35 @@
+name: Build-Deploy-PR
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  deploy-pr:
+    name: PR-Env
+    runs-on: ubuntu-latest
+    environment: 'dev'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+         
+  build-deploy-prod-test: 
+    name: Prod-test
+    runs-on: ubuntu-latest
+    environment: 'prod-test'
+    needs: deploy-pr
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
