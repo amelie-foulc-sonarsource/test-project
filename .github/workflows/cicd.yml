@@ -2,6 +2,7 @@ name: Build-Deploy-PR
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
 jobs:
   deploy-pr:
     name: PR-Env
